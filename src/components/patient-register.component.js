@@ -148,9 +148,9 @@ export default class PatientRegister extends Component {
   render() {
     return (
       <div className="col-md-12">
-        <h2>Register as a Patient</h2>
-        <div className="card card-container">
-          <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="profile-img" className="profile-img-card" />
+        <div className="container">
+          <h2>Register as a Patient</h2>
+          <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="profile-img" className="img-thumbnail" />
 
           <Form
             onSubmit={this.handleRegister}
