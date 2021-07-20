@@ -57,15 +57,8 @@ const verifyPassword = (value) => {
 };
 
 export default class PatientRegister extends Component {
-  constructor() {
-    super();
-
-    this.onChangFirstName = this.onChangFirstName.bind(this);
-    this.onChangLastName = this.onChangLastName.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onChangePasswordConfirmation = this.onChangePasswordConfirmation.bind(this);
-    this.onChangeTypeOf = this.onChangeTypeOf.bind(this);
+  constructor(props) {
+    super(props);
 
     this.state = {
       firstName: "",
@@ -77,39 +70,45 @@ export default class PatientRegister extends Component {
       successful: false,
       message: "",
     };
+
+    // this.onChangFirstName = this.onChangFirstName.bind(this);
+    // this.onChangLastName = this.onChangLastName.bind(this);
+    // this.onChangeEmail = this.onChangeEmail.bind(this);
+    // this.onChangePassword = this.onChangePassword.bind(this);
+    // this.onChangePasswordConfirmation = this.onChangePasswordConfirmation.bind(this);
   }
 
-  onChangeFirstName(e) {
+  onChangeFirstName = (e) => {
     this.setState({
       firstName: e.target.value,
     });
-  }
+  };
 
-  onChangeLastName(e) {
+  onChangeLastName = (e) => {
     this.setState({
       lastName: e.target.value,
     });
-  }
+  };
 
-  onChangeEmail(e) {
+  onChangeEmail = (e) => {
     this.setState({
       email: e.target.value,
     });
-  }
+  };
 
-  onChangePassword(e) {
+  onChangePassword = (e) => {
     this.setState({
       password: e.target.value,
     });
-  }
+  };
 
-  onChangePasswordConfirmation(e) {
+  onChangePasswordConfirmation = (e) => {
     this.setState({
       passwordConfirmation: e.target.value,
     });
-  }
+  };
 
-  handleRegister(e) {
+  handleRegister = (e) => {
     e.preventDefault();
 
     this.setState({
@@ -144,7 +143,7 @@ export default class PatientRegister extends Component {
         }
       );
     }
-  }
+  };
 
   render() {
     return (
@@ -212,7 +211,7 @@ export default class PatientRegister extends Component {
                 <div className="form-group">
                   <label htmlFor="passwordConfirmation">Password Confirmation</label>
                   <Input
-                    type="passwordConfirmation"
+                    type="password"
                     className="form-control"
                     name="passwordConfirmation"
                     value={this.state.passwordConfirmation}

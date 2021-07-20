@@ -1,12 +1,93 @@
+import React, { Component } from "react";
+import { Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import PatientRegister from "./components/patient-register.component";
+import "./App.css";
+import axios from "axios";
 
-function App() {
-  return (
-    <div className="App">
-      <PatientRegister />
-    </div>
-  );
+import AuthService from "./services/auth-service";
+
+import Home from "./components/home.component";
+import PatientRegister from "./components/patient-register.component";
+import PartnerRegister from "./components/partner-register.component";
+import Login from "./components/login.component";
+import Profile from "./components/profile.component";
+
+const API_URL = "http://localhost:3000";
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentUser: undefined,
+    };
+  }
+
+  componentDidMount() {
+    axios.get(API_URL + `/users/${AuthService.getCurrentUserId()}`).then((response) => {
+      this.setState({ currentUser: response.data });
+      // console.log(response.data);
+    });
+  }
+
+  logOut = () => {
+    AuthService.logout();
+  };
+
+  render() {
+    return (
+      <div>
+        <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <Link to={"/"} className="navbar-brand">
+            Patient Chat
+          </Link>
+          {this.state.currentUser ? (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/profile"} className="nav-link">
+                  {this.state.currentUser.first_name}
+                </Link>
+              </li>
+              <li className="nav-item">
+                <a href="/login" className="nav-link" onClick={this.logOut}>
+                  LogOut
+                </a>
+              </li>
+            </div>
+          ) : (
+            <div className="navbar-nav ml-auto">
+              <li className="nav-item">
+                <Link to={"/login"} className="nav-link">
+                  Login
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={"/patient-register"} className="nav-link">
+                  Register as Patient
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link to={"/partner-register"} className="nav-link">
+                  Register as Patient Partner
+                </Link>
+              </li>
+            </div>
+          )}
+        </nav>
+
+        <div className="container mt-3">
+          <Switch>
+            <Route exact path={["/", "/home"]} component={Home} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/patient-register" component={PatientRegister} />
+            <Route exact path="/partner-register" component={PartnerRegister} />
+            <Route exact path="/profile" component={Profile} />
+          </Switch>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;

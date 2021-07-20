@@ -59,13 +59,6 @@ const verifyPassword = (value) => {
 export default class PartnerRegister extends Component {
   constructor(props) {
     super(props);
-    this.handleRegister = this.handleRegister.bind(this);
-    this.onChangFirstName = this.onChangFirstName.bind(this);
-    this.onChangLastName = this.onChangLastName.bind(this);
-    this.onChangeEmail = this.onChangeEmail.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
-    this.onChangePasswordConfirmation = this.onChangePasswordConfirmation.bind(this);
-    this.onChangeTypeOf = this.onChangeTypeOf.bind(this);
 
     this.state = {
       firstName: "",
@@ -79,37 +72,37 @@ export default class PartnerRegister extends Component {
     };
   }
 
-  onChangeFirstName(e) {
+  onChangeFirstName = (e) => {
     this.setState({
       firstName: e.target.value,
     });
-  }
+  };
 
-  onChangeLastName(e) {
+  onChangeLastName = (e) => {
     this.setState({
       lastName: e.target.value,
     });
-  }
+  };
 
-  onChangeEmail(e) {
+  onChangeEmail = (e) => {
     this.setState({
       email: e.target.value,
     });
-  }
+  };
 
-  onChangePassword(e) {
+  onChangePassword = (e) => {
     this.setState({
       password: e.target.value,
     });
-  }
+  };
 
-  onChangePasswordConfirmation(e) {
+  onChangePasswordConfirmation = (e) => {
     this.setState({
       passwordConfirmation: e.target.value,
     });
-  }
+  };
 
-  handleRegister(e) {
+  handleRegister = (e) => {
     e.preventDefault();
 
     this.setState({
@@ -144,7 +137,7 @@ export default class PartnerRegister extends Component {
         }
       );
     }
-  }
+  };
 
   render() {
     return (

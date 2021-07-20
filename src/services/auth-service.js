@@ -11,14 +11,16 @@ class AuthService {
       })
       .then((response) => {
         if (response.data.jwt) {
-          localStorage.setItem("user", JSON.stringify(response.data));
+          localStorage.setItem("jwt", response.data.jwt);
+          localStorage.setItem("user_id", response.data.user_id);
         }
         return response.data;
       });
   }
 
   logout() {
-    localStorage.removeItem("user");
+    localStorage.removeItem("jwt");
+    localStorage.removeItem("user_id");
   }
 
   register(first_name, last_name, email, password, password_confirmation, type_of) {
@@ -32,8 +34,10 @@ class AuthService {
     });
   }
 
-  getCurrentUser() {
-    return JSON.parse(localStorage.getItem("user"));
+  getCurrentUserId() {
+    const id = localStorage.getItem("user_id");
+
+    return id;
   }
 }
 
