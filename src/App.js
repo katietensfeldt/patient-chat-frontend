@@ -11,6 +11,8 @@ import PatientRegister from "./components/patient-register.component";
 import PartnerRegister from "./components/partner-register.component";
 import Login from "./components/login.component";
 import Profile from "./components/profile.component";
+import Partners from "./components/partners.component";
+import Conversations from "./components/conversations.component";
 
 const API_URL = "http://localhost:3000";
 class App extends Component {
@@ -47,6 +49,22 @@ class App extends Component {
                   {this.state.currentUser.first_name}
                 </Link>
               </li>
+              {this.state.currentUser.type_of === "patient" ? (
+                <li className="nav-item">
+                  <Link to={"/partners"} className="nav-link">
+                    Patient Partners
+                  </Link>
+                </li>
+              ) : (
+                <li className="nav-item"></li>
+              )}
+
+              <li className="nav-item">
+                <a href="/conversations" className="nav-link">
+                  Conversations
+                </a>
+              </li>
+
               <li className="nav-item">
                 <a href="/login" className="nav-link" onClick={this.logOut}>
                   LogOut
@@ -83,6 +101,8 @@ class App extends Component {
             <Route exact path="/patient-register" component={PatientRegister} />
             <Route exact path="/partner-register" component={PartnerRegister} />
             <Route exact path="/profile" component={Profile} />
+            <Route exact path="/partners" component={Partners} />
+            <Route exact path="/conversations" component={Conversations} />
           </Switch>
         </div>
       </div>

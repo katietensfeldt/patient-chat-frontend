@@ -205,7 +205,7 @@ export default class PartnerRegister extends Component {
                 <div className="form-group">
                   <label htmlFor="passwordConfirmation">Password Confirmation</label>
                   <Input
-                    type="passwordConfirmation"
+                    type="password"
                     className="form-control"
                     name="passwordConfirmation"
                     value={this.state.passwordConfirmation}
