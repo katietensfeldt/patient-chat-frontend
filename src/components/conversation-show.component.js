@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import authHeader from "../services/auth-header";
+import ActionCable from "actioncable";
 
 const API_URL = "http://localhost:3000";
 
@@ -25,10 +26,29 @@ export default class ConversationShow extends Component {
         conversation: response.data,
         patient: response.data.patient,
         partner: response.data.partner,
-        messages: response.data.messages.reverse(),
+        messages: response.data.messages,
       });
       console.log(this.state.conversation);
     });
+  }
+
+  componentDidMount() {
+    this.cable = ActionCable.createConsumer("ws://localhost:3000/cable");
+    this.messagesChannel = this.cable.subscriptions.create(
+      {
+        channel: "MessagesChannel",
+      },
+      {
+        connected: () => {
+          console.log("Connected to messages channel");
+        },
+        disconnected: () => {},
+        received: (data) => {
+          console.log(data);
+          this.setState({ messages: this.state.messages.shift(data) });
+        },
+      }
+    );
   }
 
   onChangeNewMessage = (e) => {
