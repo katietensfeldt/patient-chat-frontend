@@ -13,6 +13,7 @@ import Login from "./components/login.component";
 import Profile from "./components/profile.component";
 import Partners from "./components/partners.component";
 import Conversations from "./components/conversations.component";
+import ConversationShow from "./components/conversation-show.component";
 
 const API_URL = "http://localhost:3000";
 class App extends Component {
@@ -103,6 +104,7 @@ class App extends Component {
             <Route exact path="/profile" component={Profile} />
             <Route exact path="/partners" component={Partners} />
             <Route exact path="/conversations" component={Conversations} />
+            <Route path="/conversations/:id" component={ConversationShow} />
           </Switch>
         </div>
       </div>

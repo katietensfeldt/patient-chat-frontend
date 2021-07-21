@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import authHeader from "../services/auth-header";
 
 const API_URL = "http://localhost:3000";
 export default class Partners extends Component {
@@ -10,8 +10,18 @@ export default class Partners extends Component {
       partners: [],
     };
 
-    axios.get(API_URL + "/users").then((response) => {
+    axios.get(`${API_URL}/users`).then((response) => {
       this.setState({ partners: response.data });
+    });
+  }
+
+  startConversation(id) {
+    let params = {
+      partner_id: id,
+    };
+    axios.post(`${API_URL}/conversations`, params, { headers: authHeader() }).then((response) => {
+      console.log(response.data);
+      this.props.history.push(`/conversations/${response.data.id}`);
     });
   }
 
@@ -21,18 +31,18 @@ export default class Partners extends Component {
       <div className="container">
         <h1>Partners Page</h1>
         <p>Choose a partner to start a conversation with:</p>
-        <div class="row gy-3">
+        <div className="row gy-3">
           {partners.map((partner) => (
-            <div key={partner.id} class="col-sm-6">
-              <div class="card">
-                <div class="card-body">
-                  <h5 class="card-title">
+            <div key={partner.id} className="col-sm-6">
+              <div className="card">
+                <div className="card-body">
+                  <h5 className="card-title">
                     {partner.first_name} {partner.last_name}
                   </h5>
-                  <p class="card-text">Patient Partner</p>
-                  <Link to={`/partners/${partner.id}`} class="btn btn-primary">
+                  <p className="card-text">Patient Partner</p>
+                  <button onClick={() => this.startConversation(partner.id)} className="btn btn-primary">
                     Start conversation
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>

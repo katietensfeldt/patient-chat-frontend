@@ -35,15 +35,6 @@ export default class Profile extends Component {
           <p>{this.state.currentUser.type_of}</p>
         </header>
         <h4>Conversations:</h4>
-        <div>
-          {console.log(this.state.conversations)}
-
-          {/* {this.state.conversations &&
-            this.state.conversations.map((conversation) => {
-              <div key={conversation.id}>{conversation.patient.first_name}</div>;
-            })}
-          ; */}
-        </div>
       </div>
     );
   }
