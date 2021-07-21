@@ -26,15 +26,16 @@ export default class Profile extends Component {
   }
 
   render() {
+    const { conversations } = this.state;
     return (
       <div className="container">
         <header className="jumbotron">
-          <h3>
+          <h1>
             <strong>{this.state.currentUser.first_name}'s</strong> Profile
-          </h3>
-          <p>{this.state.currentUser.type_of}</p>
+          </h1>
+          <h4>You are listed as a {this.state.currentUser.type_of} user</h4>
         </header>
-        <h4>Conversations:</h4>
+        <h5>You currently have {conversations.length} conversation(s) active</h5>
       </div>
     );
   }
