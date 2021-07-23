@@ -22,7 +22,7 @@ export default class Conversations extends Component {
         <h1>Your Conversations</h1>
         {conversations.map((conversation) => (
           <div className="row gy-3" key={conversation.id}>
-            {AuthService.getCurrentUserId() == conversation.patient_id ? (
+            {parseInt(AuthService.getCurrentUserId()) === conversation.patient_id ? (
               <div className="card col-5">
                 <div className="card-body">
                   <h5 className="card-title">

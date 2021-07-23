@@ -33,8 +33,8 @@ export default class ConversationShow extends Component {
   }
 
   componentDidMount() {
-    this.cable = ActionCable.createConsumer("ws://localhost:3000/cable");
-    this.messagesChannel = this.cable.subscriptions.create(
+    var cable = ActionCable.createConsumer("ws://localhost:3000/cable");
+    cable.subscriptions.create(
       {
         channel: "MessagesChannel",
       },
@@ -45,7 +45,7 @@ export default class ConversationShow extends Component {
         disconnected: () => {},
         received: (data) => {
           console.log(data);
-          this.setState({ messages: this.state.messages.shift(data) });
+          // this.setState({ messages: this.state.messages.shift(data) });
         },
       }
     );
