@@ -45,7 +45,8 @@ export default class ConversationShow extends Component {
         disconnected: () => {},
         received: (data) => {
           console.log(data);
-          // this.setState({ messages: this.state.messages.shift(data) });
+          this.state.messages.push(data);
+          this.setState({ newMessage: "" });
         },
       }
     );
