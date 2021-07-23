@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
+import moment from "moment";
 import authHeader from "../services/auth-header";
 import ActionCable from "actioncable";
 
@@ -26,7 +27,7 @@ export default class ConversationShow extends Component {
         conversation: response.data,
         patient: response.data.patient,
         partner: response.data.partner,
-        messages: response.data.messages,
+        messages: response.data.messages.reverse(),
       });
       console.log(this.state.conversation);
     });
@@ -45,7 +46,7 @@ export default class ConversationShow extends Component {
         disconnected: () => {},
         received: (data) => {
           console.log(data);
-          this.state.messages.push(data);
+          this.state.messages.unshift(data);
           this.setState({ newMessage: "" });
         },
       }
@@ -97,6 +98,7 @@ export default class ConversationShow extends Component {
               <h5 className="card-title">
                 {message.user_id === conversation.patient_id ? patient.first_name : partner.first_name}
               </h5>
+              <h6>{moment(message.created_at).calendar()}</h6>
               <p className="card-text">{message.body}</p>
             </div>
           </div>
