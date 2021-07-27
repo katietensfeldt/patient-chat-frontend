@@ -59,7 +59,8 @@ export default class ConversationShow extends Component {
     });
   };
 
-  sendMessage = () => {
+  handleSubmit = (e) => {
+    e.preventDefault();
     let params = {
       body: this.state.newMessage,
       conversation_id: this.state.conversation.id,
@@ -78,20 +79,23 @@ export default class ConversationShow extends Component {
         <h4>
           <strong>{patient.first_name}</strong> and <strong>{partner.first_name}</strong>
         </h4>
-        <div className="input-group mb-3">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Type your message"
-            aria-label="Type your message"
-            aria-describedby="button-addon2"
-            value={newMessage}
-            onChange={this.onChangeNewMessage}
-          />
-          <button onClick={this.sendMessage} className="btn btn-info" type="button" id="button-addon2">
-            Send message
-          </button>
-        </div>
+        <form class="row g-3" onSubmit={this.handleSubmit}>
+          <div class="col-auto">
+            <textarea
+              type="text"
+              class="form-control"
+              placeholder="Type your message"
+              value={newMessage}
+              onChange={this.onChangeNewMessage}
+            />
+          </div>
+          <div class="col-auto">
+            <button type="submit" class="btn btn-info mb-3">
+              Send
+            </button>
+          </div>
+        </form>
+
         {messages.map((message) => (
           <div key={message.id} className="card w-75">
             <div className="card-body">
