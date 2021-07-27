@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { Component } from "react";
 import authHeader from "../services/auth-header";
+import UserService from "../services/user-service";
 
-const API_URL = "http://localhost:3000";
 export default class Partners extends Component {
   constructor(props) {
     super(props);
@@ -10,7 +10,7 @@ export default class Partners extends Component {
       partners: [],
     };
 
-    axios.get(`${API_URL}/users`).then((response) => {
+    UserService.getPartners().then((response) => {
       this.setState({ partners: response.data });
     });
   }
@@ -19,7 +19,7 @@ export default class Partners extends Component {
     let params = {
       partner_id: id,
     };
-    axios.post(`${API_URL}/conversations`, params, { headers: authHeader() }).then((response) => {
+    axios.post(`${window.API_URL}/conversations`, params, { headers: authHeader() }).then((response) => {
       console.log(response.data);
       this.props.history.push(`/conversations/${response.data.id}`);
     });

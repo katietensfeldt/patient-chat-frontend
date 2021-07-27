@@ -15,7 +15,6 @@ import Partners from "./components/partners.component";
 import Conversations from "./components/conversations.component";
 import ConversationShow from "./components/conversation-show.component";
 
-const API_URL = "http://localhost:3000";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -26,9 +25,8 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get(API_URL + `/users/${AuthService.getCurrentUserId()}`).then((response) => {
+    axios.get(window.API_URL + `/users/${AuthService.getCurrentUserId()}`).then((response) => {
       this.setState({ currentUser: response.data });
-      // console.log(response.data);
     });
   }
 

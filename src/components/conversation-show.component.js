@@ -4,8 +4,6 @@ import moment from "moment";
 import authHeader from "../services/auth-header";
 import ActionCable from "actioncable";
 
-const API_URL = "http://localhost:3000";
-
 export default class ConversationShow extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +20,7 @@ export default class ConversationShow extends Component {
       match: { params },
     } = props;
 
-    axios.get(API_URL + `/conversations/${params.id}`, { headers: authHeader() }).then((response) => {
+    axios.get(window.API_URL + `/conversations/${params.id}`, { headers: authHeader() }).then((response) => {
       this.setState({
         conversation: response.data,
         patient: response.data.patient,
@@ -65,7 +63,7 @@ export default class ConversationShow extends Component {
       body: this.state.newMessage,
       conversation_id: this.state.conversation.id,
     };
-    axios.post(`${API_URL}/messages`, params, { headers: authHeader() }).then((response) => {
+    axios.post(`${window.API_URL}/messages`, params, { headers: authHeader() }).then((response) => {
       console.log(response.data);
     });
   };

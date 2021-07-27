@@ -4,7 +4,6 @@ import React, { Component } from "react";
 import AuthService from "../services/auth-service";
 import UserService from "../services/user-service";
 
-const API_URL = "http://localhost:3000";
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -14,7 +13,7 @@ export default class Profile extends Component {
       conversations: {},
     };
 
-    axios.get(API_URL + `/users/${AuthService.getCurrentUserId()}`).then((response) => {
+    axios.get(window.API_URL + `/users/${AuthService.getCurrentUserId()}`).then((response) => {
       this.setState({ currentUser: response.data });
       // console.log(response.data);
     });

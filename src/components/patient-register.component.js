@@ -70,12 +70,6 @@ export default class PatientRegister extends Component {
       successful: false,
       message: "",
     };
-
-    // this.onChangFirstName = this.onChangFirstName.bind(this);
-    // this.onChangLastName = this.onChangLastName.bind(this);
-    // this.onChangeEmail = this.onChangeEmail.bind(this);
-    // this.onChangePassword = this.onChangePassword.bind(this);
-    // this.onChangePasswordConfirmation = this.onChangePasswordConfirmation.bind(this);
   }
 
   onChangeFirstName = (e) => {
