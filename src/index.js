@@ -5,7 +5,9 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 
-process.env.NODE_ENV === "development" ? (window.API_URL = "http://localhost:3000") : (window.API_URL = "/");
+process.env.NODE_ENV === "development"
+  ? (window.API_URL = "http://localhost:3000")
+  : (window.API_URL = "https://sheltered-dawn-14149.herokuapp.com");
 
 ReactDOM.render(
   <BrowserRouter>
