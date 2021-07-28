@@ -36,7 +36,7 @@ export default class ConversationShow extends Component {
   }
 
   componentDidMount() {
-    var cable = ActionCable.createConsumer(window.API_URL + "/cable");
+    var cable = ActionCable.createConsumer("wss://sheltered-dawn-14149.herokuapp.com/cable");
     cable.subscriptions.create(
       {
         channel: "MessagesChannel",
