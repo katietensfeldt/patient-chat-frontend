@@ -20,19 +20,23 @@ export default class ConversationShow extends Component {
       match: { params },
     } = props;
 
+    axios.get(window.API_URL + `/messages?id=${params.id}`).then((response) => {
+      this.setState({
+        messages: response.data,
+      });
+    });
+
     axios.get(window.API_URL + `/conversations/${params.id}`, { headers: authHeader() }).then((response) => {
       this.setState({
         conversation: response.data,
         patient: response.data.patient,
         partner: response.data.partner,
-        messages: response.data.messages.reverse(),
       });
-      console.log(this.state.conversation);
     });
   }
 
   componentDidMount() {
-    var cable = ActionCable.createConsumer("ws://localhost:3000/cable");
+    var cable = ActionCable.createConsumer(window.API_URL + "/cable");
     cable.subscriptions.create(
       {
         channel: "MessagesChannel",
@@ -59,11 +63,11 @@ export default class ConversationShow extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    let params = {
+    let newParams = {
       body: this.state.newMessage,
       conversation_id: this.state.conversation.id,
     };
-    axios.post(`${window.API_URL}/messages`, params, { headers: authHeader() }).then((response) => {
+    axios.post(`${window.API_URL}/messages`, newParams, { headers: authHeader() }).then((response) => {
       console.log(response.data);
     });
   };
@@ -77,18 +81,18 @@ export default class ConversationShow extends Component {
         <h4>
           <strong>{patient.first_name}</strong> and <strong>{partner.first_name}</strong>
         </h4>
-        <form class="row g-3" onSubmit={this.handleSubmit}>
-          <div class="col-auto">
+        <form className="row g-3" onSubmit={this.handleSubmit}>
+          <div className="col-auto">
             <textarea
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Type your message"
               value={newMessage}
               onChange={this.onChangeNewMessage}
             />
           </div>
-          <div class="col-auto">
-            <button type="submit" class="btn btn-info mb-3">
+          <div className="col-auto">
+            <button type="submit" className="btn btn-info mb-3">
               Send
             </button>
           </div>

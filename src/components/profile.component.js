@@ -1,5 +1,4 @@
 import axios from "axios";
-import { div } from "prelude-ls";
 import React, { Component } from "react";
 import AuthService from "../services/auth-service";
 import UserService from "../services/user-service";

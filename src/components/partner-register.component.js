@@ -126,6 +126,7 @@ export default class PartnerRegister extends Component {
           this.setState({
             successful: true,
           });
+          this.props.history.push("/login");
         },
         (error) => {
           const resMessage =
